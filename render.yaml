@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: gridwise-energy-optimizer
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: LLM_API_URL
+        value: ""
+      - key: LLM_API_KEY
+        value: ""
+      - key: LLM_MODEL
+        value: ""
+      - key: LLM_TIMEOUT_SECONDS
+        value: "20"
+      - key: LLM_MAX_TOKENS
+        value: "600"

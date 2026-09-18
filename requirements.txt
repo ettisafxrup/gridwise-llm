@@ -1,0 +1,8 @@
+FastAPI
+uvicorn
+Pydantic
+NumPy
+SciPy
+Requests
+python-dotenv
+Pytest

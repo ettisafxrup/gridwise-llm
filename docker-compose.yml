@@ -1,0 +1,30 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: gridwise-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gridwise-api
+    restart: unless-stopped
+    depends_on:
+      - ollama
+    ports:
+      - "6969:8000"
+    environment:
+      LLM_PROVIDER: local
+      LLM_API_URL: http://ollama:11434/v1/chat/completions
+      LLM_API_KEY: ollama
+      LLM_MODEL: qwen2.5:3b
+      LLM_TIMEOUT_SECONDS: 120
+      LLM_MAX_TOKENS: 600
+
+volumes:
+  ollama_data:
